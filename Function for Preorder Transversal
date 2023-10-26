@@ -1,3 +1,4 @@
+//preorder=node->left->right
 void preorder(node* root){
 	if(root==NULL){
 		return;
