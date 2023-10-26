@@ -1,0 +1,9 @@
+// inoder=left node right 
+void inorder(node* root){
+if(root==NULL){
+return ;
+}
+inorder(root->left);
+cout<<root->data<<" ";
+inoder(root->right);
+}
