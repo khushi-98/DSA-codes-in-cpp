@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+
+class node{
+	public:
+		int data;
+		node* left;
+		node* right;
+		
+		
+		node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+node* buildtree(node* root){
+	int data;
+	cout<<"enter the value of data:-";
+	cin>>data;
+	root=new node(data);
+	
+	if(data==-1){
+		return NULL;
+	}
+	cout<<"number inserted at left"<<data<<endl;
+	root->left=buildtree(root->left);
+	cout<<"Number inserted at right"<<data<<endl;
+	root->right=buildtree(root->right);
+}
+
+int countleaf(node* root){
+	if(root==NULL){
+		return 0;
+	}
+	if(root->left==NULL && root->right==NULL){
+		return 1;
+	}
+	else{
+		return countleaf(root->left)+countleaf(root->right);
+	}
+	
+}
+int main(){
+	node* root=NULL;
+	root=buildtree(root);
+	
+	cout<<"leaf count:-"<<countleaf(root)<<endl;
+	return 0;
+}
