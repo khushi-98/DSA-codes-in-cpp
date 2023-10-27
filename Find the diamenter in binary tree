@@ -1,0 +1,91 @@
+#include<iostream>
+using namespace std;
+
+class node{
+	public:
+		int data;
+		node* left;
+		node* right;
+		
+		
+		node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+node* buildtree(node* root){
+	int data;
+	cout<<"enter the value of data:-";
+	cin>>data;
+	root=new node(data);
+	
+	if(data==-1){
+		return NULL;
+	}
+	cout<<"number inserted at left"<<data<<endl;
+	root->left=buildtree(root->left);
+	cout<<"Number inserted at right"<<data<<endl;
+	root->right=buildtree(root->right);
+}
+
+int countheight(node* root){
+	if(root==NULL){
+		return 0;
+	}
+	else{
+		int lheight=countheight(root->left);
+		int rheight=countheight(root->right);
+		
+		if(lheight>rheight){
+			return (lheight+1);
+		}
+		else{
+			return(rheight+1);
+		}
+	}
+	
+}
+int diameter(node* root){
+	if(root==NULL){
+		return 0;
+	}
+	int a=diameter(root->left);
+	int b=diameter(root->right);
+	int c= countheight(root->left)+countheight(root->right)+1;
+	
+	int ans=max(a,max(b,c));
+	return ans;
+}
+
+// optimized case
+//pair<int,int> diaoptimised(node* root){
+//	if(root==NULL){
+//		pair<int,int> p=make_pair(0,0);
+//		return p;
+//	}
+//	
+//	pair<int,int> left=diaoptimised(root->left);
+//	pair<int,int> right=diaoptimised(root->right);
+//	
+//	int opt1=left.first;
+//	int opt2=right.first;
+//	int opt3=left.second+right.second+1;
+//	
+//	pair<int,int> ans;
+//    ans.first=max(opt1,max(opt2,opt3));;
+//    ans.second=max(left.second,right.second)+1;
+//    
+//    return ans;
+//	
+//}
+
+int main(){
+	node* root=NULL;
+	root=buildtree(root);
+	
+	cout<<"leaf count:-"<<countheight(root)<<endl;
+	cout<<"diameter:-"<< diameter(root)<<endl;
+	return 0;
+}
