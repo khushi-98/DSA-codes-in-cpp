@@ -1,0 +1,85 @@
+#include<iostream>
+using namespace std;
+
+class node{
+	public:
+		int data;
+		node* left;
+		node* right;
+		
+		
+		node(int data){
+			this->data=data;
+			this->left=NULL;
+			this->right=NULL;
+		}
+};
+
+node* buildtree(node* root){
+	int data;
+	cout<<"enter the value of data:-";
+	cin>>data;
+	root=new node(data);
+	
+	if(data==-1){
+		return NULL;
+	}
+	cout<<"number inserted at left"<<data<<endl;
+	root->left=buildtree(root->left);
+	cout<<"Number inserted at right"<<data<<endl;
+	root->right=buildtree(root->right);
+}
+
+
+void printleftboundary(node* root){
+	if(root){
+		if(!root->left && !root->left){
+			return;
+		}
+		cout<<root->data<<" ";
+		printleftboundary(root->left);
+	}
+}
+
+
+void printleafnodes(node* root){
+	if(root){
+		if(!root->left && !root->right){
+			cout<<root->data<<" ";
+			return;
+		}
+		printleafnodes(root->left);
+		printleafnodes(root->right);
+	}
+}
+
+
+void printrightboundary(node* root){
+	if(root){
+		if(!root->left && !root->right){
+			return;
+		}
+		printrightboundary(root->right);
+		cout<<root->data;<<" ";
+	}
+}
+
+void transversal(node* root){
+ if (root) {
+    cout << root->data << " ";
+    printleftboundary(root->left);
+    printleafnodes(root->left);
+    printleafnodes(root->right);
+    printrightboundary(root->right);
+		
+	}
+}
+int main(){
+	node* root=NULL;
+	root=buildtree(root);
+transversal(root);
+	
+	
+	return 0;
+}
+
