@@ -1,0 +1,20 @@
+int sumOfLongestBloodline(Node* root, int sum, int len, int& maxLen, int& maxSum) {
+  if (root == NULL) {
+    return 0;
+  }
+
+  sum += root->value;
+  len++;
+
+  if (len > maxLen) {
+    maxLen = len;
+    maxSum = sum;
+  } else if (len == maxLen && sum > maxSum) {
+    maxSum = sum;
+  }
+
+  int leftSum = sumOfLongestBloodline(root->left, sum, len, maxLen, maxSum);
+  int rightSum = sumOfLongestBloodline(root->right, sum, len, maxLen, maxSum);
+
+  return max(leftSum, rightSum);
+}
