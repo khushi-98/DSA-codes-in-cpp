@@ -1,0 +1,21 @@
+// recursive function
+Node* LCA(Node* root, Node* p, Node* q) {
+  if (root == nullptr) {
+    return nullptr;
+  }
+
+  if (root == p || root == q) {
+    return root;
+  }
+
+  Node* leftLCA = LCA(root->left, p, q);
+  Node* rightLCA = LCA(root->right, p, q);
+
+  if (leftLCA != nullptr && rightLCA != nullptr) {
+    return root;
+  } else if (leftLCA != nullptr) {
+    return leftLCA;
+  } else {
+    return rightLCA;
+  }
+}
