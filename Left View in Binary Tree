@@ -1,1 +1,47 @@
+#include <iostream>
+using namespace std;
+
+// Definition for a binary tree nod
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+void leftViewUtil(TreeNode* root, int depth, int &maxDepth) {
+    if (root == NULL)
+        return;
+
+   
+    if (depth > maxDepth) {
+        cout << root->val << " ";
+        maxDepth = depth;
+    }
+
+   
+    leftViewUtil(root->left, depth + 1, maxDepth);
+    leftViewUtil(root->right, depth + 1, maxDepth);
+}
+
+void leftView(TreeNode* root) {
+    int maxDepth = -1;
+    leftViewUtil(root, 0, maxDepth);
+}
+
+int main() {
+    // Example usage:
+    // Create a binary tree
+    TreeNode* root = new TreeNode(1);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(3);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+    root->right->left = new TreeNode(6);
+    root->right->right = new TreeNode(7);
+
+    leftView(root);
+
+    return 0;
+}
 
